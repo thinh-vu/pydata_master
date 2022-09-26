@@ -4,7 +4,7 @@ from datetime import datetime, date
 from datetime import timedelta
 import pandas as pd
 
-def date_from_today(days_delta, format, backward = True): # Cocate the output string with 'T00:00:00Z' or 'T23:59:59Z' if you need
+def date_from_today(days_delta, format='%Y-%m-%d', backward = True): # Cocate the output string with 'T00:00:00Z' or 'T23:59:59Z' if you need
     """
     Return a DateTime value using today's DateTime as the base.
     Args:
@@ -22,7 +22,7 @@ def date_from_today(days_delta, format, backward = True): # Cocate the output st
     return target
 
 
-def date_start_end(format, periods, freq):
+def date_start_end(periods, freq, format='%Y-%m-%d'):
     """
     Return a DateTime value using today's DateTime as the base.
     Args:
@@ -30,7 +30,7 @@ def date_start_end(format, periods, freq):
         periods (:obj:`int`, required): How many periods from today
         freq (:obj:`str`, required): datetime frequency code. Ex: 'MS' for Month Start and 'M' for Month End. See more at: 
     """
-    today = datetime.now().strftime(format)
+    today = datetime.now().strftime('%Y-%m-%d')
     target = pd.date_range(end=today, periods=periods, freq=freq)[0]\
-                .strftime('%Y-%m-%d')
+                .strftime(format)
     return target

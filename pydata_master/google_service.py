@@ -42,7 +42,6 @@ def save_gsheet (dataframe, sheet_id, sheet_name, creds, row_names=False, clean=
         df_size(:obj, required): False as the default value.
         start_cell (:obj, required): 'A1' as the default value.
     """
-    wks = gc.open_by_key(sheet_id)
     d2g.upload(dataframe, sheet_id, sheet_name, credentials=creds, row_names=row_names, clean = clean, df_size = df_size, start_cell=start_cell)
     'https://docs.google.com/spreadsheets/d/' + sheet_id
 
