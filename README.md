@@ -13,7 +13,7 @@ creds, gc = google_auth('YOUR_PATH_TO_JSON')
 
 # III. APENDICES
 
-![Datetime Frequencies](../src/pandas_daterange_freq_list.png)
+![Datetime Frequencies](../main/src/pandas_daterange_freq_list.png)
 
 # IV. 🙋‍♂️ CONTACT INFORMATION
 You can contact me at one of my social network profiles:
