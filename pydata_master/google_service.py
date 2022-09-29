@@ -56,6 +56,7 @@ def save_gspread (dataframe, sheet_id, sheet_name, gc):
     try:
         wks = gc.open_by_key(sheet_id)
         wks.worksheet(sheet_name).update([dataframe.columns.values.tolist()] + dataframe.values.tolist())
+        message = 'Data Frame has been exported to https://docs.google.com/spreadsheets/d/' + sheet_id
     except:
         wks = gc.open_by_key(sheet_id)
         rows, columns = dataframe.shape
