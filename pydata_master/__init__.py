@@ -10,7 +10,10 @@ from .project_config import (
 
 from .datetime_intel import (
     date_from_today,
-    date_start_end
+    date_start_end,
+    weeknum_intel,
+    month_intel,
+    quarter_intel
 )
 
 from .database_connect import (
