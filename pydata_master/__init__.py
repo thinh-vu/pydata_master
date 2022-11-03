@@ -4,9 +4,7 @@
 __author__ = "Thinh Vu @thinh-vu in GitHub"
 __version__ = "0.0.2"
 
-from .project_config import (
-    yaml_cred
-)
+from .project_config import *
 
 from .datetime_intel import (
     date_from_today,
@@ -36,4 +34,8 @@ from .google_service import(
     save_gspread
 )
 
-from .ai_ml import *
+from .ai_ml import (
+    transcribe,
+    video_title,
+    free_memory
+)

@@ -1,13 +1,7 @@
 import requests
 import json
 import os
-
-def lmt_detect():
-    if os.name == 'nt':
-        lmt = '\\'
-    else:
-        lmt = '/'
-    return lmt
+from .project_config import lmt_detect
 
 # SLACK API
 def slack_send_file(token_key, slack_channel, text_comment, file_path, title=None):

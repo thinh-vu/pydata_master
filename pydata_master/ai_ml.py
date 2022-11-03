@@ -1,7 +1,7 @@
 # I. Transcribe Youtube Videos
 ### !pip install git+https://github.com/openai/whisper.git -q
 import os
-from project_config import lmt_detect, ROOT_DIR
+from .project_config import lmt_detect, ROOT_DIR
 import pytube
 from pytube import YouTube
 import whisper
