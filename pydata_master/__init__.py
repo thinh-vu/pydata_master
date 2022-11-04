@@ -4,7 +4,7 @@
 __author__ = "Thinh Vu @thinh-vu in GitHub"
 __version__ = "0.0.2"
 
-from .project_config import *
+from .util import *
 
 from .datetime_intel import (
     date_from_today,
@@ -38,4 +38,9 @@ from .ai_ml import (
     transcribe,
     video_title,
     free_memory
+)
+
+from .visualization import (
+    wordcloud_gen,
+    word_tokenize_stats
 )

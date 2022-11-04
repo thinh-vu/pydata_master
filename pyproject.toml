@@ -4,3 +4,11 @@ requires = [
     "wheel"
 ]
 build-backend = "setuptools.build_meta"
+dependencies = [
+    "df2gspread",
+    "pytube",
+    "nltk",
+    "trafilatura",
+    "ffmpeg-python",
+    "git+https://github.com/openai/whisper.git"
+]

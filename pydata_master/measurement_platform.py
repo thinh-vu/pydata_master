@@ -3,7 +3,7 @@ import io
 # import json
 import os
 import pandas as pd
-from .project_config import lmt_detect
+from .util import lmt_detect
 
 def appsflyer_report(token_key, app_id, report_type, start_date, end_date, api_version='v5'):
   """
