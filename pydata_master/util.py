@@ -29,6 +29,6 @@ def get_google_font(font_family):
     file_name = ROOT_DIR + lmt + '{}.zip'.format(font_family)
     with open(file_name, 'wb') as f:
         f.write(response.content)
-    shutil.unpack_archive(file_name, lmt.join([ROOT_DIR, 'font', font_family])
+    shutil.unpack_archive(file_name, lmt.join([ROOT_DIR, 'font', font_family]))
 
 
