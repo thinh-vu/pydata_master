@@ -26,3 +26,6 @@ def free_memory():
     import torch
     gc.collect()
     torch.cuda.empty_cache()
+
+
+# II. Stable Diffusion AI image generator

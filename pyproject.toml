@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "pydata_master"
 description = "All frequently used functions in one package for the data operation in a daily basis."
-version = "0.0.3"
+version = "0.0.5"
 readme = "README.md"
 requires-python = ">=3.7"
 dependencies = [
@@ -17,5 +17,5 @@ dependencies = [
     "nltk",
     "trafilatura",
     "ffmpeg-python",
-    "whisper" 
+    "whisper @ git+https://github.com/openai/whisper.git" 
 ]
