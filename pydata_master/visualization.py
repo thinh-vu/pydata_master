@@ -1,5 +1,4 @@
 # Generate word cloud
-from trafilatura import fetch_url, extract
 from wordcloud import WordCloud
 from .util import get_google_font
 

@@ -4,3 +4,13 @@ df2gspread
 trafilatura
 nltk
 pytube
+
+
+dependencies = [
+    "df2gspread",
+    "pytube",
+    "nltk",
+    "trafilatura",
+    "ffmpeg-python",
+    "whisper @ git+https://github.com/openai/whisper.git" 
+]

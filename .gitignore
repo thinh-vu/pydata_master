@@ -7,3 +7,14 @@ pydata_master.egg-info/top_level.txt
 dist/pydata_master-0.0.1-py3-none-any.whl
 dist/pydata_master-0.0.1.tar.gz
 pydata_master/draft.py
+dist/pydata_master-0.0.3.tar.gz
+dist/pydata_master-0.0.3-py3-none-any.whl
+pydata_master.egg-info/requires.txt
+pydata_master/__pycache__/__init__.cpython-38.pyc
+pydata_master/__pycache__/ai_ml.cpython-38.pyc
+pydata_master/__pycache__/database_connect.cpython-38.pyc
+pydata_master/__pycache__/datetime_intel.cpython-38.pyc
+pydata_master/__pycache__/google_service.cpython-38.pyc
+pydata_master/__pycache__/messaging_api.cpython-38.pyc
+pydata_master/__pycache__/util.cpython-38.pyc
+pydata_master/__pycache__/visualization.cpython-38.pyc

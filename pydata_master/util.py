@@ -4,6 +4,7 @@ import yaml
 import os
 import requests
 import shutil
+from trafilatura import fetch_url, extract
 
 def lmt_detect():
     if os.name == 'nt':
@@ -31,4 +32,8 @@ def get_google_font(font_family):
         f.write(response.content)
     shutil.unpack_archive(file_name, lmt.join([ROOT_DIR, 'font', font_family]))
 
+def web_to_text(url):
+    downloaded = fetch_url(url)
+    result = extract(downloaded)
+    return result
 
