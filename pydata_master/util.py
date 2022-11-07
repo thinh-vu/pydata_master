@@ -6,8 +6,9 @@ import requests
 import shutil
 from trafilatura import fetch_url, extract
 
-# Detect the running OS and return file path delimiter
+# Working with file systems
 def lmt_detect():
+    """Detect the running OS and return file path delimiter"""
     if os.name == 'nt':
         lmt = '\\'
     else:
@@ -16,8 +17,32 @@ def lmt_detect():
 
 ROOT_DIR = os.path.abspath(os.curdir)
 
-# Read YAML config file
+def file_ls(directory=ROOT_DIR):
+    """List all file in the root directory"""
+    data = []
+    for entry in os.listdir(directory):
+        if os.path.isfile(os.path.join(directory, entry)):
+            data.append(entry)
+    return data
+
+def subdir_ls(basepath=ROOT_DIR):
+    """List all subdirectories in the root folder"""
+    data = []
+    for entry in os.listdir(basepath):
+        if os.path.isdir(os.path.join(basepath, entry)):
+            data.append(entry)
+    return data
+
+# Data loading
+def read_txt(path_to_file):
+    """Read a plain text file"""
+    with open(path_to_file) as f:
+        content = f.read()
+    return content
+
+# Config file loading
 def yaml_cred(item_name, cred_path):
+    """Read YAML config file"""
     with open(cred_path) as file: 
         documents = yaml.full_load(file)
         for item, doc in documents.items():
@@ -25,8 +50,9 @@ def yaml_cred(item_name, cred_path):
               secret_key = doc
               return secret_key
 
-# Download & extract a Google font to local folder
+# Download remote resource
 def get_google_font(font_family):
+    """Download & extract a Google font to local folder"""
     lmt = lmt_detect()
     font_url = 'https://fonts.google.com/download?family={}'.format(font_family)
     response = requests.get(font_url)
@@ -35,14 +61,9 @@ def get_google_font(font_family):
         f.write(response.content)
     shutil.unpack_archive(file_name, lmt.join([ROOT_DIR, 'font', font_family]))
 
-# Convert a web page content to text file
 def web_to_text(url):
+    """Convert a web page content to text file"""
     downloaded = fetch_url(url)
     result = extract(downloaded)
     return result
 
-# Open text file
-def read_txt(path_to_file):
-    with open(path_to_file) as f:
-        content = f.read()
-    return content
