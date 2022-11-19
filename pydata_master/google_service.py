@@ -5,6 +5,12 @@ from oauth2client.service_account import ServiceAccountCredentials
 import gspread
 from df2gspread import df2gspread as d2g
 
+from google.oauth2 import service_account # to use gg search console
+from googleapiclient.discovery import build
+import json
+import requests
+
+# Authentication
 def google_auth(json_cred_path):
     """
     Return a creds and gc to use Authenticate the Google service
@@ -16,6 +22,7 @@ def google_auth(json_cred_path):
     gc = gspread.authorize(creds)
     return creds, gc
 
+# Google Sheets
 def read_gsheet(sheet_id, sheet_name, gc):
     """
     Read a Google Sheets file to return a DataFrame. Given the fact that the target Google Sheets file has been shared to your Google Service Account.
@@ -64,3 +71,61 @@ def save_gspread (dataframe, sheet_id, sheet_name, gc):
         wks.worksheet(sheet_name).update([dataframe.columns.values.tolist()] + dataframe.values.tolist())
         message = 'Data Frame has been exported to https://docs.google.com/spreadsheets/d/' + sheet_id
     return message
+
+# Google Search Console
+def connect(key):
+    """Create a connection to the Google Search Console API and return service object.
+    Args:
+        key (string): Google Search Console JSON client secrets path.
+    """
+    scope = ['https://www.googleapis.com/auth/webmasters']
+    credentials = service_account.Credentials.from_service_account_file(key, scopes=scope)
+    service = build(
+        'searchconsole',
+        'v1',
+        credentials=credentials
+    )
+    return service
+
+def query(service, site_url, payload):
+    """Run a query on the Google Search Console API and return a dataframe of results.
+    Args:
+        service (object): Service object from connect()
+        site_url (string): URL of Google Search Console property
+        payload (dict): API query payload dictionary    
+    """
+    response = service.searchanalytics().query(siteUrl=site_url, body=payload).execute()
+    results = []
+    for row in response['rows']:    
+        data = {}
+        for i in range(len(payload['dimensions'])):
+            data[payload['dimensions'][i]] = row['keys'][i]
+        data['clicks'] = row['clicks']
+        data['impressions'] = row['impressions']
+        data['ctr'] = round(row['ctr'] * 100, 2)
+        data['position'] = round(row['position'], 2)        
+        results.append(data)
+    return pd.DataFrame.from_dict(results)
+
+def search_analysis_extract(site_url, start_date, end_date, dimension=["date","page","device","query"], limit=1000, start=0, key=key):
+    """Extract Google Search Console data to a dataframe using connect and query functions defined above.
+    Args:
+        site_url (:obj:`str`, required): URL of Google Search Console property
+        start_date (:obj:`str`, required): Start date to extract data
+        end_date (:obj:`str`, required): Start date to extract data
+        dimension (:obj:`list`, optional): Available dimension: date, page, device, query, search-appearance (this one can only sit standalone). Default value =  ["date","page","device","query"]
+        limit (:obj:`int`, optional): Maximum limit is 25000. Default value = 1000.
+        start (:obj:`int`, optional): Start from the first result, default value = 0. 
+        key (:obj:`str`, optional): Google Search Console JSON client secrets path.
+    """
+    service = connect(key)
+    payload = {
+        'startDate': f"{start_date}",
+        'endDate': f"{end_date}",
+        'dimensions': dimension, # 'search-appearance' can only sit standalone
+        'rowLimit': f"{limit}",
+        'startRow': f"{start}"
+    }
+    site_url = f"{site_url}"
+    df = query(service, site_url, payload)
+    return df

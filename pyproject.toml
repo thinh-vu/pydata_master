@@ -15,5 +15,6 @@ dependencies = [
     "df2gspread",
     "pytube",
     "nltk",
-    "trafilatura" 
+    "trafilatura",
+    "google-auth-httplib2"
 ]

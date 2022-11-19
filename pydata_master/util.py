@@ -5,6 +5,7 @@ import os
 import requests
 import shutil
 from trafilatura import fetch_url, extract
+import subprocess
 
 # Working with file systems
 def lmt_detect():
@@ -67,3 +68,16 @@ def web_to_text(url):
     result = extract(downloaded)
     return result
 
+# Run cmd command
+def runcmd(cmd, verbose = False, *args, **kwargs):
+    process = subprocess.Popen(
+        cmd,
+        stdout = subprocess.PIPE,
+        stderr = subprocess.PIPE,
+        text = True,
+        shell = True
+    )
+    std_out, std_err = process.communicate()
+    if verbose:
+        print(std_out.strip(), std_err)
+    pass
