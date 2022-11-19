@@ -93,15 +93,15 @@ def quarter_intel(datetime_now):
 
 def last_quarter_date (current_quarter):
     """Return the last date of a specific quarter"""
-  if current_quarter == 1:
-    last_qdate = '03-31'
-  elif current_quarter == 2:
-    last_qdate = '06-30'
-  elif current_quarter == 3:
-    last_qdate = '09-30'
-  elif current_quarter == 4:
-    last_qdate = '12-31'
-  return last_qdate
+    if current_quarter == 1:
+        last_qdate = '03-31'
+    elif current_quarter == 2:
+        last_qdate = '06-30'
+    elif current_quarter == 3:
+        last_qdate = '09-30'
+    elif current_quarter == 4:
+        last_qdate = '12-31'
+    return last_qdate
 
 def weeknum_gen():
     if today_val.strftime('%a') == 'Mon':
