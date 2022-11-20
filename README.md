@@ -1,5 +1,5 @@
 # I. INTRODUCTION
-`pydata_master` is an all-in-one package for the data operation in a daily basis which contains almost frequently used functions I need.
+`pydata_master` is an all-in-one package for daily data operation that contains the most frequently used functions I need.
 
 <div id="badges" align="center">
 <img src="https://img.shields.io/pypi/pyversions/pydata_master?logoColor=brown&style=plastic" alt= "Version"/>
@@ -16,6 +16,17 @@
 - Import the whole package to your project: `from pydata_master import *`
 - Import a specific part of the package: `from pydata_master.util import *`
 
+## 2.2. Install dependencies
+If you install the package from the Github source, you must install dependencies separately. You can run this command to install all of them at once.
+
+```
+!pip install trafilatura
+!pip install df2gspread
+!pip install pytube
+!pip install nltk
+!pip install trafilatura
+!pip install google-auth-httplib2
+```
 
 ## Google services
 creds, gc = google_auth('YOUR_PATH_TO_JSON')
@@ -25,7 +36,6 @@ creds, gc = google_auth('YOUR_PATH_TO_JSON')
 ![Datetime Frequencies](../main/src/pandas_daterange_freq_list.png)
 
 # IV. 🙋‍♂️ CONTACT INFORMATION
-You can contact me at one of my social network profiles:
 
 <div id="badges" align="center">
   <a href="https://www.linkedin.com/in/thinh-vu">
