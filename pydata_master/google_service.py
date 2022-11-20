@@ -107,16 +107,16 @@ def query(service, site_url, payload):
         results.append(data)
     return pd.DataFrame.from_dict(results)
 
-def search_analysis_extract(site_url, start_date, end_date, dimension=["date","page","device","query"], limit=1000, start=0, key=key):
+def search_analysis_extract(key, site_url, start_date, end_date, dimension=["date","page","device","query"], limit=1000, start=0):
     """Extract Google Search Console data to a dataframe using connect and query functions defined above.
     Args:
+        key (:obj:`str`, required): Google Search Console JSON client secrets path.
         site_url (:obj:`str`, required): URL of Google Search Console property
         start_date (:obj:`str`, required): Start date to extract data
         end_date (:obj:`str`, required): Start date to extract data
         dimension (:obj:`list`, optional): Available dimension: date, page, device, query, search-appearance (this one can only sit standalone). Default value =  ["date","page","device","query"]
         limit (:obj:`int`, optional): Maximum limit is 25000. Default value = 1000.
         start (:obj:`int`, optional): Start from the first result, default value = 0. 
-        key (:obj:`str`, optional): Google Search Console JSON client secrets path.
     """
     service = connect(key)
     payload = {
