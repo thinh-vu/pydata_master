@@ -1,7 +1,7 @@
 import requests
 import json
 import os
-from .util import lmt_detect
+from ur_gadget import lmt_detect
 
 # SLACK API
 def slack_send_file(token_key, slack_channel, text_comment, file_path, title=None):

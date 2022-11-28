@@ -18,3 +18,5 @@ pydata_master/__pycache__/google_service.cpython-38.pyc
 pydata_master/__pycache__/messaging_api.cpython-38.pyc
 pydata_master/__pycache__/util.cpython-38.pyc
 pydata_master/__pycache__/visualization.cpython-38.pyc
+dist/pydata_master-0.0.6-py3-none-any.whl
+dist/pydata_master-0.0.6.tar.gz

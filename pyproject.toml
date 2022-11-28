@@ -13,8 +13,7 @@ readme = "README.md"
 requires-python = ">=3.7"
 dependencies = [
     "df2gspread",
-    "pytube",
     "nltk",
-    "trafilatura",
-    "google-auth-httplib2"
+    "google-auth-httplib2",
+    "ur_gadget"
 ]

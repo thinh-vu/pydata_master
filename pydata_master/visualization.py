@@ -1,6 +1,6 @@
 # Generate word cloud
 from wordcloud import WordCloud
-from .util import get_google_font
+from ur_gadget import get_google_font
 
 # Words tokenize
 import nltk
