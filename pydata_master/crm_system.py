@@ -92,9 +92,9 @@ def fc_report_request(start_date, end_date, report_type, token_key): # Conversat
   return report_id
 
 def fc_master_report (start_date, end_date, report_type, token_key):
-"""One click Freshchat retrieve"""
-report_id = fc_report_request(start_date, end_date, report_type, token_key)
-report = fc_retrieve_report(report_id, token_key)
-df = fc_load_report(report)
-return df
+  """One click Freshchat retrieve"""
+  report_id = fc_report_request(start_date, end_date, report_type, token_key)
+  report = fc_retrieve_report(report_id, token_key)
+  df = fc_load_report(report)
+  return df
 
