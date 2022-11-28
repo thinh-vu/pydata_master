@@ -39,15 +39,6 @@ def hs_search_contact(user_email, token_key, properties_list):
   return result
 
 # FRESHCHAT
-
-def fc_master_report (start_date, end_date, report_type, token_key):
-  """One click Freshchat retrieve"""
-  report_id = fc_report_request(start_date, end_date, report_type, token_key)
-  report = fc_retrieve_report(report_id, token_key)
-  df = fc_load_report(report)
-  return df
-  
-
 def fc_load_report(report_content):
   """Read FreshChat report. Convert JSON content into DataFrame using the output of the fc_retrieve_report function.
   Args:
@@ -99,4 +90,11 @@ def fc_report_request(start_date, end_date, report_type, token_key): # Conversat
   response = requests.request("POST", url, headers=headers, data=payload).json()
   report_id = response['id']
   return report_id
+
+def fc_master_report (start_date, end_date, report_type, token_key):
+"""One click Freshchat retrieve"""
+report_id = fc_report_request(start_date, end_date, report_type, token_key)
+report = fc_retrieve_report(report_id, token_key)
+df = fc_load_report(report)
+return df
 
