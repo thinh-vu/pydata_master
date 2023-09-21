@@ -1,6 +1,7 @@
 # Copyright 2022 Thinh Vu @ GitHub
 # See LICENSE for details.
 import pandas as pd
+from pandas import json_normalize
 from oauth2client.service_account import ServiceAccountCredentials
 import gspread
 from df2gspread import df2gspread as d2g
@@ -128,4 +129,36 @@ def search_analysis_extract(key, site_url, start_date, end_date, dimension=["dat
     }
     site_url = f"{site_url}"
     df = query(service, site_url, payload)
+    return df
+
+
+# Google Nearby Search API - Google Maps Platform enable required
+
+def nearby_search(api_key, lat='10.773412', lng='106.6854949', radius=2000, keyword='nha khoa', show_all=False):
+    url = f"https://maps.googleapis.com/maps/api/place/nearbysearch/json?location={lat},{lng}&radius={radius}&keyword={keyword}&key={api_key}"
+    response = requests.request("GET", url).json()
+    df = json_normalize(response['results'])
+    if show_all == False:
+        df = df[['name', 'vicinity', 'place_id', 'types', 'user_ratings_total', 'geometry.location.lat', 'geometry.location.lng', 'plus_code.compound_code', 'opening_hours.open_now']]
+    else:
+        df = df
+    return df
+
+# A function to get search result for multiple keywords
+def nearby_search_batch(api_key, lat='10.773412', lng='106.6854949', radius=2000, keywords=['nha khoa', 'dental'], show_all=False):
+    """
+    A function to get Nearby Search result on Google Maps for multiple keywords
+    Args:
+        api_key (:obj:`str`, required): Google Maps API key.
+        lat (:obj:`str`, optional): Latitude of the location. Default value = '10.773412'.
+        lng (:obj:`str`, optional): Longitude of the location. Default value = '106.6854949'.
+        radius (:obj:`int`, optional): Radius of the search area. Default value = 2000 meters.
+        keywords (:obj:`list`, optional): List of keywords to search. Default value = ['nha khoa', 'dental', 'phòng nha'].
+        show_all (:obj:`boolean`, optional): True if you want to show all columns. Default value = False.
+    """
+    df = pd.DataFrame()
+    for keyword in keywords:
+        df = pd.concat([df, nearby_search(lat=lat, lng=lng, radius=radius, keyword=keyword, show_all=show_all, api_key=api_key)]).reset_index(drop=True)
+        # drop duplicate rows
+        df = df.drop_duplicates(subset=['place_id']).reset_index(drop=True)
     return df

@@ -6,6 +6,7 @@ import json
 from pandas import json_normalize
 import urllib.request, shutil #, zipfile
 import time
+from ur_gadget import *
 
 # HUBSPOT
 # contact_id = hs_object_id
